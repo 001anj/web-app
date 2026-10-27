@@ -40,19 +40,20 @@ export default function Exercise5() {
         <input
           type="text"
           id="search-input"
+          data-testid="search-input"
           className="form-control"
           placeholder="Search products..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <button type="submit" id="search-btn" className="btn-primary" disabled={isSearching}>
+        <button type="submit" id="search-btn" data-testid="search-btn" className="btn-primary" disabled={isSearching}>
           {isSearching ? 'Searching...' : 'Search'}
         </button>
       </form>
 
-      <div id="search-results">
+      <div id="search-results" data-testid="search-results">
         {results && results.length === 0 && (
-          <p id="no-results" style={{color: 'var(--text-secondary)'}}>No products found.</p>
+          <p id="no-results" data-testid="no-results" style={{color: 'var(--text-secondary)'}}>No products found.</p>
         )}
         
         {results && results.length > 0 && (

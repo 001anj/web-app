@@ -36,6 +36,7 @@ export default function Exercise2() {
           <input
             type="text"
             id="username"
+            data-testid="username-input"
             className="form-control"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -46,12 +47,13 @@ export default function Exercise2() {
           <input
             type="password"
             id="password"
+            data-testid="password-input"
             className="form-control"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="submit" id="login-btn" className="btn-primary">
+        <button type="submit" id="login-btn" className="btn-primary" data-testid="login-button">
           Log In
         </button>
       </form>
