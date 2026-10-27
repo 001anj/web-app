@@ -7,8 +7,35 @@ export const errorMessages = {
 
 export const userCredentials = {
     firstName: faker.person.firstName(),
-    lastName: faker.person.lastName(), 
+    lastName: faker.person.lastName(),
 };
+
+export const pageHeaders = {
+  loginPageHeader: 'Exercise 1: Automate a Login Form',
+  ecommercePageHeader: 'Exercise 6: Filter Products by Category',
+};
+
+export const invalidLoginCredentials = {
+  username: 'invalidUser',
+  password: 'invalidPass',
+};
+
+export const onlyUsernameCredentials = {
+  username: 'admin',
+  password: '',
+};
+
+export const onlyPasswordCredentials = {
+  username: '',
+  password: 'admin123',
+};
+
+export const registrationMessages = {
+  success: 'Registration Successful',
+  thankYouMessage: 'Thank you for registering,',
+};
+
+export const dynamicButtonClickedMessage = 'Dynamic button clicked!';
 
 const searchableProducts = [
   { name: 'Wireless Headphones', price: 99.99, category: 'Electronics' },
@@ -19,15 +46,16 @@ const searchableProducts = [
 ];
 export const randomProduct = faker.helpers.arrayElement(searchableProducts);
 
-export const expectedProductsByCategory: Record<string, string[]> = {
-  Gaming: ['PlayStation 5', 'Xbox Series X'],
-  Laptops: ['MacBook Pro', 'Dell XPS 15'],
-  Smartphones: ['iPhone 15', 'Samsung Galaxy S24'],
-};
+export const expectedProducts = [
+  { name: 'PlayStation 5', category: 'Gaming', price: 499 },
+  { name: 'Xbox Series X', category: 'Gaming', price: 499 },
+  { name: 'MacBook Pro', category: 'Laptops', price: 1999 },
+  { name: 'Dell XPS 15', category: 'Laptops', price: 1499 },
+  { name: 'iPhone 15', category: 'Smartphones', price: 999 },
+  { name: 'Samsung Galaxy S24', category: 'Smartphones', price: 899 },
+];
 
-export const allProductCategories = Object.entries(expectedProductsByCategory).flatMap(
-  ([category, products]) => products.map(() => category),
-);
+export const allProductCategories = expectedProducts.map((product) => product.category);
 
 const countries = ['us', 'uk', 'pl', 'de'] as const;
 export const randomCountry = faker.helpers.arrayElement(countries);

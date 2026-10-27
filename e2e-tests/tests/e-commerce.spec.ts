@@ -1,12 +1,12 @@
 import { expect } from '@playwright/test';
 import { test } from '../support/fixtures/page-fixture';
-import { allProductCategories, expectedProductsByCategory } from '../support/test-data';
+import { allProductCategories, expectedProducts, pageHeaders } from '../support/test-data';
 
 test.describe('Filter dropdown test', () => {
 
     test.beforeEach(async ({ eCommercePage }) => {
         await eCommercePage.goToEcommercePage(6);
-        await expect(eCommercePage.filterPageHeader).toContainText('Exercise 6: Filter Products by Category');
+        await expect(eCommercePage.filterPageHeader).toContainText(pageHeaders.ecommercePageHeader);
     });
     test('User is able to filter products with all categories filter', async ({ eCommercePage }) => {
         await eCommercePage.selectCategory('All');
@@ -15,13 +15,18 @@ test.describe('Filter dropdown test', () => {
         await expect(eCommercePage.productCategoryUnderCard).toHaveText(allProductCategories);
     });
 
-    for (const [category, products] of Object.entries(expectedProductsByCategory)) {
+    const productsByCategory = Map.groupBy(expectedProducts, (product) => product.category);
+
+    for (const [category, products] of productsByCategory) {
         test(`User is able to filter products with a category ${category}`, async ({ eCommercePage }) => {
             await eCommercePage.selectCategory(category);
 
             await expect(eCommercePage.productCards).toHaveCount(products.length);
             await expect(eCommercePage.productCategoryUnderCard).toHaveText(products.map(() => category));
-            await expect(eCommercePage.productNameUnderCard).toHaveText(products);
+            await expect(eCommercePage.productNameUnderCard).toHaveText(products.map((product) => product.name));
+            await expect(eCommercePage.productPriceUnderCard).toHaveText(
+                products.map((product) => `$${product.price}`),
+            );
         });
     }
 });

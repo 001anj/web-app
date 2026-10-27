@@ -1,12 +1,23 @@
 import { expect } from '@playwright/test';
 import { test } from '../support/fixtures/page-fixture';
-import { errorMessages, userCredentials, randomCountry, randomProduct } from '../support/test-data';
+import {
+  errorMessages,
+  userCredentials,
+  randomCountry,
+  randomProduct,
+  pageHeaders,
+  invalidLoginCredentials,
+  onlyUsernameCredentials,
+  onlyPasswordCredentials,
+  registrationMessages,
+  dynamicButtonClickedMessage,
+} from '../support/test-data';
 import { getEnv } from '../support/helper';
 
 test.describe('Positive test cases forLogin Tests', () => {
   test('User can log in and log out successfully', async ({ loginPage }) => {
     await loginPage.goToPage(1);
-    await expect(loginPage.loginPageHeader).toHaveText('Exercise 1: Automate a Login Form');
+    await expect(loginPage.loginPageHeader).toHaveText(pageHeaders.loginPageHeader);
     await loginPage.usernameInput.fill(getEnv('ADMIN_USERNAME'));
     await loginPage.passwordInput.fill(getEnv('ADMIN_PASSWORD'));
     await loginPage.loginButton.click();
@@ -22,8 +33,8 @@ test.describe('Negative test cases for Login Tests', () => {
   });
 
   test('User cannot log in with invalid credentials', async ({ loginPage }) => {
-    await loginPage.usernameInput.fill('invalidUser');
-    await loginPage.passwordInput.fill('invalidPass');
+    await loginPage.usernameInput.fill(invalidLoginCredentials.username);
+    await loginPage.passwordInput.fill(invalidLoginCredentials.password);
     await loginPage.loginButton.click();
     await expect(loginPage.loginError(errorMessages.invalidCredentials)).toBeVisible();
   });
@@ -36,15 +47,15 @@ test.describe('Negative test cases for Login Tests', () => {
   });
 
   test('User cannot log in with only username', async ({ loginPage }) => {
-    await loginPage.usernameInput.fill('admin');
-    await loginPage.passwordInput.fill('');
+    await loginPage.usernameInput.fill(onlyUsernameCredentials.username);
+    await loginPage.passwordInput.fill(onlyUsernameCredentials.password);
     await loginPage.loginButton.click();
     await expect(loginPage.loginError(errorMessages.emptyCredentials)).toBeVisible();
   });
 
   test('User cannot log in with only password', async ({ loginPage }) => {
-    await loginPage.usernameInput.fill('');
-    await loginPage.passwordInput.fill('admin123');
+    await loginPage.usernameInput.fill(onlyPasswordCredentials.username);
+    await loginPage.passwordInput.fill(onlyPasswordCredentials.password);
     await loginPage.loginButton.click();
     await expect(loginPage.loginError(errorMessages.emptyCredentials)).toBeVisible();
   });
@@ -59,8 +70,8 @@ test.describe('User is able to register successfully', () => {
     await loginPage.termsCheckbox.check();
     await loginPage.registerButton.click();
     await expect(loginPage.registrationSuccessMessage).toBeVisible();
-    await expect(loginPage.registrationSuccessMessage).toContainText('Registration Successful');
-    await expect(loginPage.registrationSuccessMessage).toContainText('Thank you for registering,');
+    await expect(loginPage.registrationSuccessMessage).toContainText(registrationMessages.success);
+    await expect(loginPage.registrationSuccessMessage).toContainText(registrationMessages.thankYouMessage);
   });
 });
 
@@ -68,7 +79,7 @@ test.describe('User is able to click on dynamic elements', () => {
   test('User can click on dynamic elements', async ({ loginPage }) => {
     await loginPage.goToPage(4);
     await loginPage.dynamicButton.visible().click();
-    await expect(loginPage.dynamicMessage).toContainText('Dynamic button clicked!');
+    await expect(loginPage.dynamicMessage).toContainText(dynamicButtonClickedMessage);
 
   });
 });
