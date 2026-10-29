@@ -22,7 +22,7 @@ export default function Exercise3() {
 
   if (submitted) {
     return (
-      <div className="alert alert-success" id="success-message">
+      <div className="alert alert-success" data-testid="registration-success" id="success-message">
         <h2>Registration Successful</h2>
         <p>Thank you for registering, {formData.firstName}!</p>
       </div>
@@ -42,6 +42,7 @@ export default function Exercise3() {
           <input
             type="text"
             id="firstName"
+            data-testid="first-name-input"
             className="form-control"
             value={formData.firstName}
             onChange={(e) => setFormData({...formData, firstName: e.target.value})}
@@ -53,6 +54,7 @@ export default function Exercise3() {
           <input
             type="text"
             id="lastName"
+            data-testid="last-name-input"
             className="form-control"
             value={formData.lastName}
             onChange={(e) => setFormData({...formData, lastName: e.target.value})}
@@ -63,6 +65,7 @@ export default function Exercise3() {
           <label htmlFor="country">Country</label>
           <select
             id="country"
+            data-testid="country-select"
             className="form-control"
             value={formData.country}
             onChange={(e) => setFormData({...formData, country: e.target.value})}
@@ -79,6 +82,7 @@ export default function Exercise3() {
           <input
             type="checkbox"
             id="newsletter"
+            data-testid="newsletter-checkbox"
             checked={formData.newsletter}
             onChange={(e) => setFormData({...formData, newsletter: e.target.checked})}
           />
@@ -88,12 +92,13 @@ export default function Exercise3() {
           <input
             type="checkbox"
             id="terms"
+            data-testid="terms-checkbox"
             checked={formData.terms}
             onChange={(e) => setFormData({...formData, terms: e.target.checked})}
           />
           <label htmlFor="terms" style={{margin: 0}}>I agree to the Terms and Conditions *</label>
         </div>
-        <button type="submit" id="register-btn" className="btn-primary">
+        <button type="submit" id="register-btn" data-testid="register-button" className="btn-primary">
           Register
         </button>
       </form>

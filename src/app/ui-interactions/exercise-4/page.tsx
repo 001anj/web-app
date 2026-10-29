@@ -26,7 +26,7 @@ export default function Exercise4() {
       </p>
 
       {message && (
-        <div className="alert alert-success" id="dynamic-message">
+        <div className="alert alert-success" data-testid="dynamic-message" id="dynamic-message">
           {message}
         </div>
       )}

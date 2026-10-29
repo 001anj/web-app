@@ -46,7 +46,7 @@ export default function Exercise7() {
             display: 'flex', justifyContent: 'space-between', padding: '16px', background: 'rgba(255,255,255,0.05)', borderRadius: '8px'
           }}>
             <span className="product-name">{p.name}</span>
-            <span className="product-price" data-price={p.price} style={{fontWeight: 'bold', color: 'var(--accent-hover)'}}>${p.price}</span>
+            <span className="product-price" data-testid="product-price" data-price={p.price} style={{fontWeight: 'bold', color: 'var(--accent-hover)'}}>${p.price}</span>
           </div>
         ))}
       </div>

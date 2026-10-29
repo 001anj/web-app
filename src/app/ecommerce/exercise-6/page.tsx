@@ -44,8 +44,8 @@ export default function Exercise6() {
         {filtered.map(p => (
           <div key={p.id} className="product-card" data-testid="product-card" style={{padding: '16px', background: 'rgba(255,255,255,0.05)', borderRadius: '8px'}}>
             <h3>{p.name}</h3>
-            <p className="product-category" style={{color: 'var(--text-secondary)'}}>{p.category}</p>
-            <p style={{fontWeight: 'bold', color: 'var(--accent-hover)'}}>${p.price}</p>
+            <p className="product-category" data-testid="product-category" style={{color: 'var(--text-secondary)'}}>{p.category}</p>
+            <p className="product-price" data-testid="product-price" style={{fontWeight: 'bold', color: 'var(--accent-hover)'}}>${p.price}</p>
           </div>
         ))}
       </div>

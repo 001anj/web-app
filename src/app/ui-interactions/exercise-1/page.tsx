@@ -17,10 +17,10 @@ export default function Exercise1() {
 
   if (isLoggedIn) {
     return (
-      <div id="welcome-message" className="alert alert-success">
+      <div id="welcome-message" data-testid="logged-in-message" className="alert alert-success">
         <h2>Welcome, {username}!</h2>
         <p>You have successfully logged in.</p>
-        <button className="btn-primary" onClick={() => setIsLoggedIn(false)}>Log Out</button>
+        <button className="btn-primary" data-testid="logout-button" onClick={() => setIsLoggedIn(false)}>Log Out</button>
       </div>
     );
   }
