@@ -12,7 +12,8 @@ export const userCredentials = {
 
 export const pageHeaders = {
   loginPageHeader: 'Exercise 1: Automate a Login Form',
-  ecommercePageHeader: 'Exercise 6: Filter Products by Category',
+  filterPageHeader: 'Exercise 6: Filter Products by Category',
+  sortPageHeader: 'Exercise 7: Sort Products by Price'
 };
 
 export const invalidLoginCredentials = {

@@ -3,10 +3,9 @@ import { test } from '../support/fixtures/page-fixture';
 import { allProductCategories, expectedProducts, pageHeaders } from '../support/test-data';
 
 test.describe('Filter dropdown test', () => {
-
     test.beforeEach(async ({ eCommercePage }) => {
         await eCommercePage.goToEcommercePage(6);
-        await expect(eCommercePage.filterPageHeader).toContainText(pageHeaders.ecommercePageHeader);
+        await expect(eCommercePage.filterPageHeader).toContainText(pageHeaders.filterPageHeader);
     });
     test('User is able to filter products with all categories filter', async ({ eCommercePage }) => {
         await eCommercePage.selectCategory('All');
@@ -29,4 +28,27 @@ test.describe('Filter dropdown test', () => {
             );
         });
     }
+});
+
+test.describe('Sorting test', () => {
+    test.beforeEach(async ({ eCommercePage }) => {
+        await eCommercePage.goToEcommercePage(7);
+        await expect(eCommercePage.filterPageHeader).toContainText(pageHeaders.sortPageHeader);
+    });
+
+    test('User is able to sort product by ascending price', async ({ eCommercePage }) => {
+        await eCommercePage.sortByPrice('asc');
+        const productPrices = await eCommercePage.productPriceUnderCard.allTextContents();
+        const numPrices = productPrices.map((price) => parseFloat(price.replace('$', '')));
+        const sortedProductPrices = [...numPrices].sort((a, b) => a - b);
+        expect(numPrices).toEqual(sortedProductPrices);
+    });
+
+    test('User is able to sort product by descending price', async ({ eCommercePage }) => {
+        await eCommercePage.sortByPrice('desc');
+        const productPrices = await eCommercePage.productPriceUnderCard.allTextContents();
+        const numPrices = productPrices.map((price) => parseFloat(price.replace('$', '')));
+        const sortedProductPrices = [...numPrices].sort((a, b) => b - a);
+        expect(numPrices).toEqual(sortedProductPrices);
+    });
 });

@@ -8,6 +8,9 @@ export class ECommercePage {
   readonly productCategoryUnderCard: Locator;
   readonly productNameUnderCard: Locator;
   readonly productPriceUnderCard: Locator;
+  readonly sortDropdown: Locator;
+  readonly productCardInSortingList: Locator;
+  readonly productPriceInSortingList: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -19,6 +22,11 @@ export class ECommercePage {
     this.productCategoryUnderCard = this.productCards.getByTestId('product-category');
     this.productNameUnderCard = this.productCards.locator('h3');
     this.productPriceUnderCard = this.productCards.getByTestId('product-price');
+
+    // Sorting
+    this.sortDropdown = page.getByTestId('sort-select');
+    this.productCardInSortingList = page.getByTestId('product-card');
+    this.productPriceInSortingList = this.productCardInSortingList.getByTestId('product-price');
   }
 
   async goToEcommercePage(pageNumber: number) {
@@ -27,5 +35,9 @@ export class ECommercePage {
 
   async selectCategory(category: string) {
     await this.categoryFilterdropdown.selectOption(category);
+  }
+
+  async sortByPrice(sort: string) {
+    await this.sortDropdown.selectOption(sort);
   }
 }
