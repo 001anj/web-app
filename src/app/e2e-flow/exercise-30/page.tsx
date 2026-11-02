@@ -74,9 +74,9 @@ export default function Exercise30() {
           const isActive = idx === currentStepIndex;
           
           return (
-            <div key={s.id} style={{display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 1, gap: '8px', width: '80px'}}>
-              <div style={{
-                width: '40px', height: '40px', borderRadius: '50%', 
+            <div key={s.id} data-testid={`step-${s.id}`} style={{display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 1, gap: '8px', width: '80px'}}>
+              <div data-testid={`step-icon-${s.id}`} style={{
+                width: '40px', height: '40px', borderRadius: '50%',
                 background: isCompleted ? 'var(--success-color)' : isActive ? 'var(--accent-color)' : 'var(--bg-color)',
                 border: `2px solid ${isCompleted ? 'var(--success-color)' : isActive ? 'var(--accent-color)' : 'var(--glass-border)'}`,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -85,7 +85,7 @@ export default function Exercise30() {
               }}>
                 {isCompleted ? <CheckCircle2 size={20} /> : <Icon size={20} />}
               </div>
-              <span style={{
+              <span data-testid={`step-label-${s.id}`} style={{
                 fontSize: '12px', fontWeight: isActive ? 600 : 400,
                 color: isActive ? 'var(--text-primary)' : 'var(--text-secondary)'
               }}>

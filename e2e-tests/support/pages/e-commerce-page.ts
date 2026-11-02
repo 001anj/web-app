@@ -11,6 +11,11 @@ export class ECommercePage {
   readonly sortDropdown: Locator;
   readonly productCardInSortingList: Locator;
   readonly productPriceInSortingList: Locator;
+  readonly playwrightAddToCartButton: Locator;
+  readonly automationCourseAddToCartButton: Locator;
+  readonly cartItems: Locator;
+  readonly quantityInput: Locator;
+  readonly totalPrice: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -27,6 +32,15 @@ export class ECommercePage {
     this.sortDropdown = page.getByTestId('sort-select');
     this.productCardInSortingList = page.getByTestId('product-card');
     this.productPriceInSortingList = this.productCardInSortingList.getByTestId('product-price');
+
+    // Adding products to cart
+    this.playwrightAddToCartButton = page.getByTestId('add-to-cart-1');
+    this.automationCourseAddToCartButton = page.getByTestId('add-to-cart-2');
+    this.cartItems = page.getByTestId('cart-badge');
+
+    // Updating cart
+    this.quantityInput = page.getByTestId('quantity-input');
+    this.totalPrice = page.getByTestId('total-price'); 
   }
 
   async goToEcommercePage(pageNumber: number) {
