@@ -8,12 +8,18 @@ export const errorMessages = {
 export const userCredentials = {
     firstName: faker.person.firstName(),
     lastName: faker.person.lastName(),
+    shippingAddress: faker.location.streetAddress(),
+    creditCardNumber: faker.finance.creditCardNumber()
 };
 
 export const pageHeaders = {
   loginPageHeader: 'Exercise 1: Automate a Login Form',
   filterPageHeader: 'Exercise 6: Filter Products by Category',
-  sortPageHeader: 'Exercise 7: Sort Products by Price'
+  sortPageHeader: 'Exercise 7: Sort Products by Price',
+  cartPageHeader: 'Exercise 8: Add a Product to the Shopping Cart',
+  productQuantityPageHeader: 'Exercise 9: Update Product Quantity',
+  shoppingPageHeader: 'Exercise 30: Build an End-to-End E-Commerce Test',
+  orderConfirmationPageHeader: 'Order Confirmed!'
 };
 
 export const invalidLoginCredentials = {
@@ -34,6 +40,8 @@ export const onlyPasswordCredentials = {
 export const registrationMessages = {
   success: 'Registration Successful',
   thankYouMessage: 'Thank you for registering,',
+  registrationConfirmation: 'Account created! Please log in.',
+  orderConfirmation: 'Thank you for your purchase. Your order number is #E2E-'
 };
 
 export const dynamicButtonClickedMessage = 'Dynamic button clicked!';
@@ -60,4 +68,10 @@ export const allProductCategories = expectedProducts.map((product) => product.ca
 
 const countries = ['us', 'uk', 'pl', 'de'] as const;
 export const randomCountry = faker.helpers.arrayElement(countries);
+
+export const productQuality = {
+  defaultQuantity: 1,
+  defaultPrice: '$49.99',
+  randomQuantity: faker.number.bigInt({ min: 1, max: 10 }).toString(),
+}
 
