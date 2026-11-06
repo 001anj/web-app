@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from '../support/fixtures/page-fixture';
 import { faker } from '@faker-js/faker';
-import { allProductCategories, expectedProducts, pageHeaders, productQuality } from '../support/test-data';
+import { allProductCategories, userCredentials, expectedProducts, pageHeaders, productQuality, registrationMessages, orderSummary } from '../support/test-data';
 
 test.describe('Filter dropdown test', () => {
     test.beforeEach(async ({ eCommercePage }) => {
@@ -126,3 +126,60 @@ test.describe('Update cart test', () => {
         });
     });
 });
+test.describe('Remove product from cart', () => {
+    test.beforeEach(async ({ eCommercePage }) => {
+        await eCommercePage.goToEcommercePage(10);
+        await expect(eCommercePage.filterPageHeader).toContainText(pageHeaders.removeProductPageHeader);
+        await expect(eCommercePage.cartItemsInRemoveTab).toHaveCount(2);
+    });
+
+    test('User is able to remove both products from the cart', async ({ eCommercePage }) => {
+            await eCommercePage.removeFromCartButton.first().click();
+            await expect(eCommercePage.cartItemsInRemoveTab).toHaveCount(1);
+            await eCommercePage.removeFromCartButton.click();
+            await expect(eCommercePage.cartItemsInRemoveTab).toHaveCount(0);
+    });
+});
+
+test.describe('Checkout process test', () => {
+    test.beforeEach(async ({ eCommercePage }) => {
+        await eCommercePage.goToEcommercePage(11);
+        await expect(eCommercePage.filterPageHeader).toContainText(pageHeaders.checkoutPageHeader);
+        await expect(eCommercePage.checkoutForm).toBeVisible();
+    });
+
+    test('User is able to complete the checkout process', async ({ eCommercePage }) => {
+            await eCommercePage.fullNameInput.fill(userCredentials.fullName);
+            await eCommercePage.shippingAddressInput.fill(userCredentials.shippingAddress);
+            await eCommercePage.cityInput.fill(userCredentials.city);
+            await eCommercePage.zipCodeInput.fill(userCredentials.zipCode);
+            await eCommercePage.creditCardNumberInput.fill(userCredentials.creditCardNumber);
+            await eCommercePage.placeOrderButton.click();
+            await expect(eCommercePage.orderConfirmationMessage).toContainText(registrationMessages.orderSuccess);
+    });
+});
+
+test.describe('Order confirmation page', () => {
+    test.beforeEach(async ({ eCommercePage }) => {
+        await eCommercePage.goToEcommercePage(12);
+        await expect(eCommercePage.filterPageHeader).toContainText(pageHeaders.orderSummaryPageHeader);
+    });
+
+    test('User is able to validate the order confirmation message', async ({ eCommercePage }) => {
+        
+        await test.step('Validate tax summary', async () => {
+        const subtotal = await eCommercePage.subTotalSummary.textContent();
+        const tax = await eCommercePage.taxSummary.textContent();
+        const total = await eCommercePage.totalSummary.textContent();
+
+        const subtotalValue = Number(subtotal?.replace('$', ''));
+        const taxValue = Number(tax?.replace('$', ''));
+        const totalValue = Number(total?.replace('$', ''));
+
+        await expect(taxValue).toBeCloseTo(subtotalValue * orderSummary.taxRate, 2);
+        await expect(totalValue).toBeCloseTo(subtotalValue + taxValue, 2);
+        });
+    });
+}); 
+
+    

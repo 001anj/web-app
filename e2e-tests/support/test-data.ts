@@ -9,7 +9,10 @@ export const userCredentials = {
     firstName: faker.person.firstName(),
     lastName: faker.person.lastName(),
     shippingAddress: faker.location.streetAddress(),
-    creditCardNumber: faker.finance.creditCardNumber()
+    creditCardNumber: faker.finance.creditCardNumber(),
+    fullName: faker.person.fullName(),
+    city: faker.location.city(),
+    zipCode: faker.location.zipCode()
 };
 
 export const pageHeaders = {
@@ -19,7 +22,11 @@ export const pageHeaders = {
   cartPageHeader: 'Exercise 8: Add a Product to the Shopping Cart',
   productQuantityPageHeader: 'Exercise 9: Update Product Quantity',
   shoppingPageHeader: 'Exercise 30: Build an End-to-End E-Commerce Test',
-  orderConfirmationPageHeader: 'Order Confirmed!'
+  orderConfirmationPageHeader: 'Order Confirmed!',
+  apiNetworkPageHeader: 'Exercise 26: Create Test Data Using an API',
+  removeProductPageHeader: 'Exercise 10: Remove a Product from the Cart',
+  checkoutPageHeader: 'Exercise 11: Complete the Checkout Process',
+  orderSummaryPageHeader: 'Exercise 12: Validate Order Summary',
 };
 
 export const invalidLoginCredentials = {
@@ -41,7 +48,8 @@ export const registrationMessages = {
   success: 'Registration Successful',
   thankYouMessage: 'Thank you for registering,',
   registrationConfirmation: 'Account created! Please log in.',
-  orderConfirmation: 'Thank you for your purchase. Your order number is #E2E-'
+  orderConfirmation: 'Thank you for your purchase. Your order number is #E2E-',
+  orderSuccess: 'Order Confirmed'
 };
 
 export const dynamicButtonClickedMessage = 'Dynamic button clicked!';
@@ -73,5 +81,9 @@ export const productQuality = {
   defaultQuantity: 1,
   defaultPrice: '$49.99',
   randomQuantity: faker.number.bigInt({ min: 1, max: 10 }).toString(),
+}
+
+export const orderSummary = {
+  taxRate: 0.10,
 }
 
